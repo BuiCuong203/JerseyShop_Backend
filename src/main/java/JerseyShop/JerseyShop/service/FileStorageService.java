@@ -1,6 +1,8 @@
 package JerseyShop.JerseyShop.service;
 
 import JerseyShop.JerseyShop.constant.DefinedUpLoadDir;
+import JerseyShop.JerseyShop.exception.AppException;
+import JerseyShop.JerseyShop.exception.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;

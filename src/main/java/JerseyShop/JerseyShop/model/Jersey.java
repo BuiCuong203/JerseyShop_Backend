@@ -7,7 +7,7 @@ import lombok.experimental.FieldDefaults;
 import java.util.List;
 
 @Data
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -17,6 +17,7 @@ public class Jersey {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @Column(unique = true)
     String name;
 
     String description;
@@ -25,9 +26,9 @@ public class Jersey {
     @ElementCollection
     List<String> images;
 
-    Double price;
+    Long price;
 
-    Double discount;
+    Long discount;
 
     @ManyToOne
     @JoinColumn(name = "club_id")

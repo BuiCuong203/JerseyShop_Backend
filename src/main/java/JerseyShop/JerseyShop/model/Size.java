@@ -1,5 +1,6 @@
 package JerseyShop.JerseyShop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,6 +20,7 @@ public class Size {
 
     Long quantity;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "jersey_id")
     Jersey jersey;

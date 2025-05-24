@@ -1,5 +1,6 @@
 package JerseyShop.JerseyShop.dto.response;
 
+import JerseyShop.JerseyShop.model.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -11,13 +12,14 @@ import java.util.List;
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class JerseyResponse {
+    Long id;
     String name;
     String description;
-    Double price;
-    Double discount;
+    Long price;
+    Long discount;
     String nameClub;
-    Long nameType;
+    String nameType;
     Double rating;
-    List<String> sizes;
+    List<Size> sizes;
     List<String> imageUrl;
 }

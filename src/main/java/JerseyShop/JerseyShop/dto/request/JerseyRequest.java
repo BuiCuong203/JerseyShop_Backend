@@ -13,8 +13,8 @@ import java.util.List;
 public class JerseyRequest {
     String name;
     String description;
-    Double price;
-    Double discount;
+    Long price;
+    Long discount;
     Long clubId;
     Long typeId;
     String sizes;

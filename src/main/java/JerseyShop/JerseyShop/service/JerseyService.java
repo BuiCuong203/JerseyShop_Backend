@@ -6,9 +6,9 @@ import JerseyShop.JerseyShop.dto.response.JerseyResponse;
 import java.util.List;
 
 public interface JerseyService {
-    public JerseyResponse createJersey(JerseyRequest jerseyRequest) throws Exception;
+    public JerseyResponse createJersey(JerseyRequest jerseyRequest, List<Long> sizesQuantity) throws Exception;
 
-    public JerseyResponse updateJersey(JerseyRequest jerseyRequest) throws Exception;
+    public JerseyResponse updateJersey(Long id, JerseyRequest jerseyRequest, List<Long> sizesQuantity) throws Exception;
 
     public void deleteJersey(Long jerseyId) throws Exception;
 
@@ -16,7 +16,7 @@ public interface JerseyService {
 
     public List<JerseyResponse> getAllJerseys() throws Exception;
 
-    public JerseyResponse searchJersey(String keyword) throws Exception;
+    public List<JerseyResponse> searchJersey(String keyword) throws Exception;
 
     public JerseyResponse addToFavourites(Long jerseyId, Long userId) throws Exception;
 }
