@@ -25,14 +25,15 @@ public class TypeServiceImp implements TypeService{
             throw new AppException(ErrorCode.TYPE_EXISTED);
         }
 
-        TypeResponse typeResponse = TypeResponse.builder()
-                .nameType(typeRequest.getNameType())
-                .build();
-
         Type type = Type.builder()
                 .nameType(typeRequest.getNameType())
                 .build();
-        typeRepository.save(type);
+        Type savedType = typeRepository.save(type);
+
+        TypeResponse typeResponse = TypeResponse.builder()
+                .id(savedType.getId())
+                .nameType(typeRequest.getNameType())
+                .build();
 
         return typeResponse;
     }

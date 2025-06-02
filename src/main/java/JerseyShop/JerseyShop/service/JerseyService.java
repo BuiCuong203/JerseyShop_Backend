@@ -6,9 +6,9 @@ import JerseyShop.JerseyShop.dto.response.JerseyResponse;
 import java.util.List;
 
 public interface JerseyService {
-    public JerseyResponse createJersey(JerseyRequest jerseyRequest, List<Long> sizesQuantity) throws Exception;
+    public JerseyResponse createJersey(JerseyRequest jerseyRequest, List<Integer> sizesQuantity) throws Exception;
 
-    public JerseyResponse updateJersey(Long id, JerseyRequest jerseyRequest, List<Long> sizesQuantity) throws Exception;
+    public JerseyResponse updateJersey(Long id, JerseyRequest jerseyRequest, List<Integer> sizesQuantity) throws Exception;
 
     public void deleteJersey(Long jerseyId) throws Exception;
 

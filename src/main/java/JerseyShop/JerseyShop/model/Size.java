@@ -18,7 +18,7 @@ public class Size {
 
     String size;
 
-    Long quantity;
+    int quantity;
 
     @JsonIgnore
     @ManyToOne

@@ -25,16 +25,17 @@ public class ClubServiceImp implements ClubService{
             throw new AppException(ErrorCode.CLUB_EXISTED);
         }
 
-        ClubResponse clubResponse = ClubResponse.builder()
-                .nameClub(clubRequest.getNameClub())
-                .image(clubRequest.getImage())
-                .build();
-
         Club club = Club.builder()
                 .nameClub(clubRequest.getNameClub())
                 .image(clubRequest.getImage())
                 .build();
-        clubRepository.save(club);
+        Club savedClub = clubRepository.save(club);
+
+        ClubResponse clubResponse = ClubResponse.builder()
+                .id(savedClub.getId())
+                .nameClub(clubRequest.getNameClub())
+                .image(clubRequest.getImage())
+                .build();
 
         return clubResponse;
     }
@@ -55,7 +56,7 @@ public class ClubServiceImp implements ClubService{
                 .nameClub(clubRequest.getNameClub())
                 .image(clubRequest.getImage())
                 .build();
-        clubRepository.save(club);
+        Club savedClub = clubRepository.save(club);
 
         ClubResponse clubResponse = ClubResponse.builder()
                 .id(id)

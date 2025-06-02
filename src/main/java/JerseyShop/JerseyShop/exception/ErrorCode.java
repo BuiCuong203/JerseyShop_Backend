@@ -16,15 +16,19 @@ public enum ErrorCode {
     WRONG_SIGNIN(1003, "Tên tài khoản hoặc mật khẩu không chính xác", HttpStatus.UNAUTHORIZED),
     EMAIL_EXISTED(1004, "Email đã tồn tại", HttpStatus.BAD_REQUEST),
     CLUB_EXISTED(1005, "Club đã tồn tại", HttpStatus.BAD_REQUEST),
-    INVALID_CLUB(1006, "Club không tồn tại", HttpStatus.BAD_REQUEST),
+    NOT_FOUND_CLUB(1006, "Club không tồn tại", HttpStatus.BAD_REQUEST),
     TYPE_EXISTED(1007, "Type đã tồn tại", HttpStatus.BAD_REQUEST),
-    INVALID_TYPE(1008, "Type không tồn tại", HttpStatus.BAD_REQUEST),
+    NOT_FOUND_TYPE(1008, "Type không tồn tại", HttpStatus.BAD_REQUEST),
     JERSEY_EXISTED(1009, "Jersey đã tồn tại", HttpStatus.BAD_REQUEST),
-    INVALID_JERSEY(1010, "Jersey không tồn tại", HttpStatus.BAD_REQUEST),
-    INVALID_USER(1011, "Người dùng không tồn tại", HttpStatus.BAD_REQUEST),
-    INVALID_SIZE(1011, "Size không tồn tại", HttpStatus.BAD_REQUEST),
+    NOT_FOUND_JERSEY(1010, "Jersey không tồn tại", HttpStatus.BAD_REQUEST),
+    NOT_FOUND_USER(1011, "Người dùng không tồn tại", HttpStatus.BAD_REQUEST),
+    NOT_FOUND_SIZE(1011, "Size không tồn tại", HttpStatus.BAD_REQUEST),
     INVALID_FILE(1012, "Không có ảnh nào được tải lên", HttpStatus.BAD_REQUEST),
-    WRONG_QUANTITY(1013, "Chưa nhập đủ số lượng", HttpStatus.BAD_REQUEST);
+    WRONG_QUANTITY(1013, "Chưa nhập đủ số lượng", HttpStatus.BAD_REQUEST),
+    OVER_QUANTITY(1014, "Số lượng vượt quá số lượng có sẵn", HttpStatus.BAD_REQUEST),
+    NOT_FOUND_CARTITEM(1015, "Không tìm thấy CartItem", HttpStatus.NOT_FOUND),
+    NOT_FOUND_CART(1016, "Không tìm thấy Cart", HttpStatus.NOT_FOUND);
+
 
 
     int code;

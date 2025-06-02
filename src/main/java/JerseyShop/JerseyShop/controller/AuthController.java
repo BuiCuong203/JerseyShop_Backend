@@ -4,7 +4,6 @@ import JerseyShop.JerseyShop.dto.request.SigninRequest;
 import JerseyShop.JerseyShop.dto.request.SignupRequest;
 import JerseyShop.JerseyShop.dto.response.ApiResponse;
 import JerseyShop.JerseyShop.dto.response.AuthResponse;
-import JerseyShop.JerseyShop.dto.response.MessageResponse;
 import JerseyShop.JerseyShop.service.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,12 +37,11 @@ public class AuthController {
     }
 
     @PostMapping("/signout")
-    public  ApiResponse<MessageResponse> signout(@RequestHeader("Authorization") String jwt){
-        MessageResponse messageResponse = authService.signout(jwt);
+    public  ApiResponse<Void> signout(@RequestHeader("Authorization") String jwt){
+        authService.signout(jwt);
 
-        return ApiResponse.<MessageResponse>builder()
+        return ApiResponse.<Void>builder()
                 .message("Đăng xuất thành công")
-                .result(messageResponse)
                 .build();
     }
 }

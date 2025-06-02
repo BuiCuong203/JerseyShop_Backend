@@ -8,6 +8,13 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MessageResponse {
-    String message;
+public class CartItemResponse {
+    Long id;
+    String nameJersey;
+    String nameClub;
+    String nameType;
+    String image;
+    String size;
+    int quantity;
+    Long totalPrice;
 }

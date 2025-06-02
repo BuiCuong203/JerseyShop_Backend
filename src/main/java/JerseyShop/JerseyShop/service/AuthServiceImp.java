@@ -5,7 +5,6 @@ import JerseyShop.JerseyShop.constant.DefinedRole;
 import JerseyShop.JerseyShop.dto.request.SigninRequest;
 import JerseyShop.JerseyShop.dto.request.SignupRequest;
 import JerseyShop.JerseyShop.dto.response.AuthResponse;
-import JerseyShop.JerseyShop.dto.response.MessageResponse;
 import JerseyShop.JerseyShop.exception.AppException;
 import JerseyShop.JerseyShop.exception.ErrorCode;
 import JerseyShop.JerseyShop.model.Cart;
@@ -29,7 +28,6 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -117,7 +115,7 @@ public class AuthServiceImp implements AuthService{
     }
 
     @Override
-    public MessageResponse signout(String jwt) {
+    public void signout(String jwt) {
         jwt = jwt.substring(7);
 
         SecretKey key = Keys.hmacShaKeyFor(secretKey.getBytes());
@@ -131,9 +129,5 @@ public class AuthServiceImp implements AuthService{
                 .build();
 
         invalidatedTokenRepository.save(invalidatedToken);
-
-        return MessageResponse.builder()
-                .message("Signout success")
-                .build();
     }
 }

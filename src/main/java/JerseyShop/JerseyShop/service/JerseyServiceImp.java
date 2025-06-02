@@ -6,7 +6,6 @@ import JerseyShop.JerseyShop.exception.AppException;
 import JerseyShop.JerseyShop.exception.ErrorCode;
 import JerseyShop.JerseyShop.model.*;
 import JerseyShop.JerseyShop.repository.*;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@Slf4j
 public class JerseyServiceImp implements JerseyService{
 
     @Autowired
@@ -36,32 +34,20 @@ public class JerseyServiceImp implements JerseyService{
     private SizeService sizeService;
 
     @Override
-    public JerseyResponse createJersey(JerseyRequest jerseyRequest, List<Long> sizesQuantity) throws Exception {
+    public JerseyResponse createJersey(JerseyRequest jerseyRequest, List<Integer> sizesQuantity) throws Exception {
         boolean existsJersey = jerseyRepository.existsByName(jerseyRequest.getName());
         if(existsJersey){
             throw new AppException(ErrorCode.JERSEY_EXISTED);
         }
 
-        Club club = clubRepository.findById(jerseyRequest.getClubId()).orElseThrow(() -> new AppException(ErrorCode.INVALID_CLUB));
-        Type type = typeRepository.findById(jerseyRequest.getTypeId()).orElseThrow(() -> new AppException(ErrorCode.INVALID_TYPE));
+        Club club = clubRepository.findById(jerseyRequest.getClubId()).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_CLUB));
+        Type type = typeRepository.findById(jerseyRequest.getTypeId()).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_TYPE));
 
         String[] tmp = jerseyRequest.getSizes().trim().split(",");
         List<Size> sizes = new ArrayList<>();
         for (String s : tmp) {
             sizes.add(Size.builder().size(s.trim()).build());
         }
-
-        JerseyResponse jerseyResponse = JerseyResponse.builder()
-                .name(jerseyRequest.getName())
-                .description(jerseyRequest.getDescription())
-                .price(jerseyRequest.getPrice())
-                .discount(jerseyRequest.getDiscount())
-                .nameClub(club.getNameClub())
-                .nameType(type.getNameType())
-                .rating(0.0)
-                .sizes(sizes)
-                .imageUrl(jerseyRequest.getImageUrl())
-                .build();
 
         Jersey jersey = Jersey.builder()
                 .name(jerseyRequest.getName())
@@ -77,26 +63,38 @@ public class JerseyServiceImp implements JerseyService{
         for (Size size : sizes) {
             size.setJersey(jersey);
         }
-        jerseyRepository.save(jersey);
+        Jersey savedJersey = jerseyRepository.save(jersey);
 
         for (int i = 0; i < sizes.size(); i++) {
             Size size = sizes.get(i);
-            log.info(size.toString());
             sizeService.updateQuantity(size.getId(), sizesQuantity.get(i));
         }
+
+        JerseyResponse jerseyResponse = JerseyResponse.builder()
+                .id(savedJersey.getId())
+                .name(jerseyRequest.getName())
+                .description(jerseyRequest.getDescription())
+                .price(jerseyRequest.getPrice())
+                .discount(jerseyRequest.getDiscount())
+                .nameClub(club.getNameClub())
+                .nameType(type.getNameType())
+                .rating(0.0)
+                .sizes(sizes)
+                .imageUrl(jerseyRequest.getImageUrl())
+                .build();
 
         return jerseyResponse;
     }
 
     @Override
-    public JerseyResponse updateJersey(Long id, JerseyRequest jerseyRequest, List<Long> sizesQuantity) throws Exception {
+    public JerseyResponse updateJersey(Long id, JerseyRequest jerseyRequest, List<Integer> sizesQuantity) throws Exception {
         boolean existsJersey = jerseyRepository.existsByName(jerseyRequest.getName());
         if(existsJersey){
             throw new AppException(ErrorCode.JERSEY_EXISTED);
         }
 
-        Club club = clubRepository.findById(jerseyRequest.getClubId()).orElseThrow(() -> new AppException(ErrorCode.INVALID_CLUB));
-        Type type = typeRepository.findById(jerseyRequest.getTypeId()).orElseThrow(() -> new AppException(ErrorCode.INVALID_TYPE));
+        Club club = clubRepository.findById(jerseyRequest.getClubId()).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_CLUB));
+        Type type = typeRepository.findById(jerseyRequest.getTypeId()).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_TYPE));
 
         String[] tmp = jerseyRequest.getSizes().trim().split(",");
         List<Size> sizes = new ArrayList<>();
@@ -104,7 +102,7 @@ public class JerseyServiceImp implements JerseyService{
             sizes.add(Size.builder().size(s.trim()).build());
         }
 
-        Jersey jersey = jerseyRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.INVALID_JERSEY));
+        Jersey jersey = jerseyRepository.findById(id).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_JERSEY));
         jersey = jersey.toBuilder()
                 .name(jerseyRequest.getName())
                 .description(jerseyRequest.getDescription())
@@ -149,7 +147,7 @@ public class JerseyServiceImp implements JerseyService{
 
     @Override
     public JerseyResponse getJerseyById(Long jerseyId) throws Exception {
-        Jersey jersey = jerseyRepository.findById(jerseyId).orElseThrow(() -> new AppException(ErrorCode.INVALID_JERSEY));
+        Jersey jersey = jerseyRepository.findById(jerseyId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_JERSEY));
 
         JerseyResponse jerseyResponse = JerseyResponse.builder()
                 .id(jersey.getId())
@@ -214,8 +212,8 @@ public class JerseyServiceImp implements JerseyService{
 
     @Override
     public JerseyResponse addToFavourites(Long jerseyId, Long userId) throws Exception {
-        Jersey jersey = jerseyRepository.findById(jerseyId).orElseThrow(() -> new AppException(ErrorCode.INVALID_JERSEY));
-        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.INVALID_USER));
+        Jersey jersey = jerseyRepository.findById(jerseyId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_JERSEY));
+        User user = userRepository.findById(userId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_USER));
 
         JerseyResponse jerseyResponse = JerseyResponse.builder()
                 .id(jersey.getId())

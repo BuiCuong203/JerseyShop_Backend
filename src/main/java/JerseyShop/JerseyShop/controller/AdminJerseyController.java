@@ -37,7 +37,7 @@ public class AdminJerseyController {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JerseyRequest jerseyRequest = objectMapper.readValue(jerseyRequestJson, JerseyRequest.class);
-        List<Long> sizeRequestList = objectMapper.readValue(sizesRequestJson, objectMapper.getTypeFactory().constructCollectionType(List.class, Long.class));
+        List<Integer> sizeRequestList = objectMapper.readValue(sizesRequestJson, objectMapper.getTypeFactory().constructCollectionType(List.class, Integer.class));
 
         if(jerseyRequest.getSizes().trim().split(",").length != sizeRequestList.size() || sizeRequestList.stream().anyMatch(size -> size == null)){
             throw new AppException(ErrorCode.WRONG_QUANTITY);
@@ -71,7 +71,7 @@ public class AdminJerseyController {
 
         ObjectMapper objectMapper = new ObjectMapper();
         JerseyRequest jerseyRequest = objectMapper.readValue(jerseyRequestJson, JerseyRequest.class);
-        List<Long> sizeRequestList = objectMapper.readValue(sizesRequestJson, objectMapper.getTypeFactory().constructCollectionType(List.class, Long.class));
+        List<Integer> sizeRequestList = objectMapper.readValue(sizesRequestJson, objectMapper.getTypeFactory().constructCollectionType(List.class, Integer.class));
 
         if(jerseyRequest.getSizes().trim().split(",").length != sizeRequestList.size() || sizeRequestList.stream().anyMatch(size -> size == null)){
             throw new AppException(ErrorCode.WRONG_QUANTITY);

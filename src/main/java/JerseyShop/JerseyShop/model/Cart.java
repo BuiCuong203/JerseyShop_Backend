@@ -20,7 +20,9 @@ public class Cart {
     @OneToOne
     User customer;
 
-    Long total;
+    int totalItem;
+
+    Long totalPrice;
 
     @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true)
     List<CartItem> cartItems;

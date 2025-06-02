@@ -8,7 +8,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 @NoArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class updateProfileRequest {
+public class UpdateProfileRequest {
     String fullname;
 
     String phone;

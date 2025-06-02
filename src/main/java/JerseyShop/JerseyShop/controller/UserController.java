@@ -1,6 +1,6 @@
 package JerseyShop.JerseyShop.controller;
 
-import JerseyShop.JerseyShop.dto.request.updateProfileRequest;
+import JerseyShop.JerseyShop.dto.request.UpdateProfileRequest;
 import JerseyShop.JerseyShop.dto.response.ApiResponse;
 import JerseyShop.JerseyShop.dto.response.ProfileResponse;
 import JerseyShop.JerseyShop.model.User;
@@ -29,7 +29,7 @@ public class UserController {
     @PutMapping("/updateProfile")
     public ApiResponse<ProfileResponse> updateProfile(
             @RequestHeader("Authorization") String jwt,
-            @RequestBody updateProfileRequest profileRequest)
+            @RequestBody UpdateProfileRequest profileRequest)
             throws Exception {
         User user = userService.findUserByJwtToken(jwt);
         ProfileResponse profileResponse = userService.updateUserProfile(user, profileRequest);

@@ -1,7 +1,7 @@
 package JerseyShop.JerseyShop.service;
 
 import JerseyShop.JerseyShop.config.JwtProvider;
-import JerseyShop.JerseyShop.dto.request.updateProfileRequest;
+import JerseyShop.JerseyShop.dto.request.UpdateProfileRequest;
 import JerseyShop.JerseyShop.dto.response.ProfileResponse;
 import JerseyShop.JerseyShop.exception.AppException;
 import JerseyShop.JerseyShop.exception.ErrorCode;
@@ -26,7 +26,7 @@ public class UserServiceImp implements UserService {
         User user = userRepository.findByEmail(email).orElse(null);
 
         if (user == null) {
-            throw new Exception("User not found");
+            throw new AppException(ErrorCode.NOT_FOUND_USER);
         }
 
         return user;
@@ -47,7 +47,7 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public ProfileResponse updateUserProfile(User user, updateProfileRequest profileRequest) throws Exception {
+    public ProfileResponse updateUserProfile(User user, UpdateProfileRequest profileRequest) throws Exception {
         Address address = Address.builder()
                 .Province(profileRequest.getProvince())
                 .District(profileRequest.getDistrict())
