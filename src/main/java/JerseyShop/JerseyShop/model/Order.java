@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,19 +24,25 @@ public class Order {
     @JoinColumn(name = "customer_id")
     User customer;
 
-    String orderStatus;
+    String fullname;
 
-    Date createdAt;
+    String email;
+
+    String phone;
 
     @Embedded
     Address deliveryAddress;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    List<OrderItem> items;
+    Date createdAt;
+
+    String orderStatus;
+
+    String methodPayment;
 
     int totalItem;
 
     Long totalPrice;
 
-    String methodPayment;
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
+    List<OrderItem> items = new ArrayList<>();
 }

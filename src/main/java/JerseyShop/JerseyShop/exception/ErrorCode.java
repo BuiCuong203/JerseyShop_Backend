@@ -27,7 +27,10 @@ public enum ErrorCode {
     WRONG_QUANTITY(1013, "Chưa nhập đủ số lượng", HttpStatus.BAD_REQUEST),
     OVER_QUANTITY(1014, "Số lượng vượt quá số lượng có sẵn", HttpStatus.BAD_REQUEST),
     NOT_FOUND_CARTITEM(1015, "Không tìm thấy CartItem", HttpStatus.NOT_FOUND),
-    NOT_FOUND_CART(1016, "Không tìm thấy Cart", HttpStatus.NOT_FOUND);
+    NOT_FOUND_CART(1016, "Không tìm thấy Cart", HttpStatus.NOT_FOUND),
+    NOT_FOUND_ORDER(1017, "Không tìm thấy Order", HttpStatus.NOT_FOUND),
+    NOT_FOUND_ORDERITEM(1018, "Không tìm thấy OrderItem", HttpStatus.NOT_FOUND),
+    WRONG_ORDER_STATUS(1019, "Không thể thay đổi được trạng thái đơn hàng", HttpStatus.BAD_REQUEST);
 
 
 

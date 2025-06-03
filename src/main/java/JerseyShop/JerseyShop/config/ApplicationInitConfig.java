@@ -21,10 +21,10 @@ public class ApplicationInitConfig {
     private PasswordEncoder passwordEncoder;
 
     @NonFinal
-    static final String ADMIN_EMAIL = "admin@gmail.com";
+    static String ADMIN_EMAIL = "admin@gmail.com";
 
     @NonFinal
-    static final String ADMIN_PASSWORD = "admin";
+    static String ADMIN_PASSWORD = "admin";
 
     @Bean
     @ConditionalOnProperty(

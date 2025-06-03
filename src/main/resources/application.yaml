@@ -20,4 +20,4 @@ spring:
       max-request-size: 50MB
 
 jwt:
-  signerKey: "udsygfsduklgfukhgsiudfghfdshfyhg9ptyhfdhgfdguhfdgufhdfdghfdhgfdghfd"
+  signerKey: ${JWT_SIGNER_KEY}

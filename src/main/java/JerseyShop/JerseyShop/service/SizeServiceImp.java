@@ -20,4 +20,9 @@ public class SizeServiceImp implements SizeService {
 
         return sizeRepository.save(size);
     }
+
+    @Override
+    public Size findSizeById(Long sizeId) throws Exception {
+        return sizeRepository.findById(sizeId).orElseThrow(() -> new AppException(ErrorCode.NOT_FOUND_SIZE));
+    }
 }
