@@ -20,6 +20,9 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
+    @Column(unique = true)
+    String orderCode;
+
     @ManyToOne
     @JoinColumn(name = "customer_id")
     User customer;
@@ -38,6 +41,8 @@ public class Order {
     String orderStatus;
 
     String methodPayment;
+
+    boolean paymentStatus;
 
     int totalItem;
 

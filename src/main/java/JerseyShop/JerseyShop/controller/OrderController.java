@@ -3,7 +3,12 @@ package JerseyShop.JerseyShop.controller;
 import JerseyShop.JerseyShop.dto.request.OrderRequest;
 import JerseyShop.JerseyShop.dto.response.ApiResponse;
 import JerseyShop.JerseyShop.dto.response.OrderResponse;
+import JerseyShop.JerseyShop.dto.response.PaymentResponse;
+import JerseyShop.JerseyShop.model.Cart;
+import JerseyShop.JerseyShop.service.CartService;
 import JerseyShop.JerseyShop.service.OrderService;
+import JerseyShop.JerseyShop.service.PaymentService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,18 +19,25 @@ import java.util.List;
 public class OrderController {
 
     @Autowired
+    private CartService cartService;
+
+    @Autowired
     private OrderService orderService;
 
+    @Autowired
+    private PaymentService paymentService;
+
     @PostMapping("/order")
-    public ApiResponse<OrderResponse> createOrder(
+    public ApiResponse<Object> createOrder(
+            HttpServletRequest req,
             @RequestBody OrderRequest request,
             @RequestHeader("Authorization") String jwt)
             throws Exception {
-        OrderResponse orderResponse = orderService.createOrder(request, jwt);
+        var object = orderService.createOrder(request, jwt, req);
 
-        return ApiResponse.<OrderResponse>builder()
-                .message("Đặt hàng thành công")
-                .result(orderResponse)
+        return ApiResponse.<Object>builder()
+                .message("Tạo đơn hàng thành công")
+                .result(object)
                 .build();
     }
 

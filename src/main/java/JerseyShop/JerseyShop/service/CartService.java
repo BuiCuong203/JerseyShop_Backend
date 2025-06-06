@@ -3,6 +3,7 @@ package JerseyShop.JerseyShop.service;
 import JerseyShop.JerseyShop.dto.request.AddCartItemRequest;
 import JerseyShop.JerseyShop.dto.response.CartItemResponse;
 import JerseyShop.JerseyShop.dto.response.CartResponse;
+import JerseyShop.JerseyShop.model.Cart;
 
 import java.util.List;
 
@@ -22,4 +23,6 @@ public interface CartService {
     public CartResponse findCartByUserId(String jwt) throws Exception;
 
     public void clearCart(String jwt) throws Exception;
+
+    public Cart findCart(String jwt) throws Exception;
 }

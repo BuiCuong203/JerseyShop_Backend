@@ -14,6 +14,7 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class OrderResponse {
     Long id;
+    String orderCode;
     String fullname;
     String email;
     String phone;
@@ -21,6 +22,7 @@ public class OrderResponse {
     Date createdAt;
     String orderStatus;
     String methodPayment;
+    boolean paymentStatus;
     int totalItem;
     Long totalPrice;
     List<OrderItemResponse> items;

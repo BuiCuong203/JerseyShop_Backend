@@ -21,3 +21,13 @@ spring:
 
 jwt:
   signerKey: ${JWT_SIGNER_KEY}
+
+payment:
+  vnPay:
+    url: ${PAY_URL}
+    returnUrl: ${RETURN_URL}
+    tmnCode: ${TMN_CODE}
+    secretKey: ${SECRET_KEY}
+    version: ${VERSION}
+    command: ${COMMAND}
+    orderType: ${ORDER_TYPE}
